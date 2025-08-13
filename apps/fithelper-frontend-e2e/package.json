@@ -1,0 +1,10 @@
+{
+  "name": "@fithelper-monorepo/fithelper-frontend-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@fithelper-monorepo/fithelper-frontend"
+    ]
+  }
+}
