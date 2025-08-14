@@ -25,7 +25,7 @@
     "src/**/*.spec.jsx",
     "src/**/*.test.jsx",
     "vite.config.ts",
-    "vite.config.mts",
+    "vite.config.ts",
     "vitest.config.ts",
     "vitest.config.mts",
     "eslint.config.js",
