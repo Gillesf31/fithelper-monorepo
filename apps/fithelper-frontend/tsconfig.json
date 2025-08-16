@@ -3,6 +3,9 @@
   "include": [],
   "references": [
     {
+      "path": "../../libs/fithelper-frontend/homepage/feature"
+    },
+    {
       "path": "./tsconfig.app.json"
     },
     {
