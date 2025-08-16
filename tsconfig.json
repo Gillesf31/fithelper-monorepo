@@ -8,6 +8,9 @@
     },
     {
       "path": "./apps/fithelper-frontend"
+    },
+    {
+      "path": "./libs/fithelper-frontend/homepage/feature"
     }
   ]
 }
