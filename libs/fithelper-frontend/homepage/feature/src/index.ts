@@ -1,1 +1,1 @@
-export * from './lib/homepage-feature';
+export { HomepageFeature } from './lib/homepage-feature';

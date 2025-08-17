@@ -28,7 +28,7 @@ export default [
             {
               sourceTag: 'type:feature',
               onlyDependOnLibsWithTags: ['type:feature'],
-            }
+            },
           ],
         },
       ],

@@ -3,6 +3,9 @@
   "include": [],
   "references": [
     {
+      "path": "../../libs/fithelper-frontend/intake/feature"
+    },
+    {
       "path": "../../libs/fithelper-frontend/homepage/feature"
     },
     {

@@ -61,6 +61,7 @@
   },
   "workspaces": [
     "apps/*",
-    "libs/fithelper-frontend/homepage/*"
+    "libs/fithelper-frontend/homepage/*",
+    "libs/fithelper-frontend/intake/*"
   ]
 }

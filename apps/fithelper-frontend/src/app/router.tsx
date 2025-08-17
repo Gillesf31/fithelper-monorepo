@@ -1,13 +1,17 @@
-import { createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
 import App from './app';
 
-const HomepageFeature = lazy(() => 
-  import('@fithelper-monorepo/homepage-feature').then(module => ({
-    default: module.HomepageFeature
+const HomepageFeature = lazy(() =>
+  import('@fithelper-monorepo/homepage-feature').then((module) => ({
+    default: module.HomepageFeature,
   }))
 );
-const IntakePage = lazy(() => import('../pages/IntakePage'));
+const IntakeFeature = lazy(() =>
+  import('@fithelper-monorepo/intake-feature').then((module) => ({
+    default: module.IntakeFeature,
+  }))
+);
 
 const router = createBrowserRouter([
   {
@@ -20,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/intake',
-        element: <IntakePage />,
+        element: <IntakeFeature />,
       },
     ],
   },
