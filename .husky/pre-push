@@ -1,0 +1,19 @@
+# Find the merge base
+BASE=$(git merge-base HEAD origin/main 2>/dev/null || git merge-base HEAD origin/develop 2>/dev/null || git merge-base HEAD HEAD~10)
+
+# Determine which base branch was used for the message
+if git merge-base HEAD origin/main >/dev/null 2>&1; then
+   BASE_NAME="origin/main"
+elif git merge-base HEAD origin/develop >/dev/null 2>&1; then
+   BASE_NAME="origin/develop"
+else
+   BASE_NAME="HEAD~10 (fallback)"
+fi
+
+echo "🔍 Running NX affected commands against base: $BASE_NAME"
+echo "📊 Base commit: $(git log --oneline -1 $BASE)"
+
+npx nx affected --target=typecheck --base=$BASE
+npx nx affected:build --base=$BASE
+npx nx affected:test --base=$BASE
+npx nx affected:e2e --base=$BASE
