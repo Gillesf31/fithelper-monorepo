@@ -17,6 +17,9 @@
     },
     {
       "path": "./libs/fithelper-frontend/intake/data-acces"
+    },
+    {
+      "path": "./libs/shared/ui-components/radio-option/ui"
     }
   ]
 }

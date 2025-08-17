@@ -62,6 +62,7 @@
   "workspaces": [
     "apps/*",
     "libs/fithelper-frontend/homepage/*",
-    "libs/fithelper-frontend/intake/*"
+    "libs/fithelper-frontend/intake/*",
+    "libs/shared/ui-components/radio-option/*"
   ]
 }

@@ -27,11 +27,19 @@ export default [
             },
             {
               sourceTag: 'type:feature',
-              onlyDependOnLibsWithTags: ['type:feature', 'type:data-access'],
+              onlyDependOnLibsWithTags: [
+                'type:feature',
+                'type:data-access',
+                'type:ui',
+              ],
             },
             {
               sourceTag: 'type:data-access',
               onlyDependOnLibsWithTags: ['type:data-access'],
+            },
+            {
+              sourceTag: 'type:ui',
+              onlyDependOnLibsWithTags: ['type:ui'],
             },
           ],
         },

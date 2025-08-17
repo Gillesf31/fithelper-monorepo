@@ -1,2 +1,3 @@
 npx nx affected:lint --uncommitted
+npx nx format:write --uncommitted
 npx nx format:check --uncommitted

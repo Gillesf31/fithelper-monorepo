@@ -2,6 +2,7 @@ import {
   calculateCalories,
   UserInfo,
 } from '@fithelper-monorepo/intake-data-access';
+import { RadioOption } from '@fithelper-monorepo/shared-ui-components-radio-option-ui';
 import { useState } from 'react';
 
 export function IntakeFeature() {
@@ -63,30 +64,23 @@ export function IntakeFeature() {
       <section className="w-full max-w-md flex flex-col p-4 card bg-base-300 shadow-xl">
         <p className="text-xl font-semibold">Gender</p>
         <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text text-lg">Male</span>
-            <input
-              onChange={() => updateGender('male')}
-              checked={userInfo.gender === 'male'}
-              className="radio checked:bg-blue-500"
-              name="gender"
-              type="radio"
-              value="male"
-            />
-          </label>
+          <RadioOption<'male' | 'female'>
+            label="Male"
+            value="male"
+            checked={userInfo.gender === 'male'}
+            onChange={updateGender}
+            name="gender"
+          />
         </div>
         <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text text-lg">Female</span>
-            <input
-              onChange={() => updateGender('female')}
-              checked={userInfo.gender === 'female'}
-              className="radio checked:bg-pink-500"
-              name="gender"
-              type="radio"
-              value="female"
-            />
-          </label>
+          <RadioOption<'male' | 'female'>
+            label="Female"
+            value="female"
+            checked={userInfo.gender === 'female'}
+            onChange={updateGender}
+            name="gender"
+            className="radio checked:bg-pink-500"
+          />
         </div>
         <label className="swap place-content-start text-xl font-semibold my-3">
           <input onChange={updateSystem} type="checkbox" />
@@ -197,45 +191,34 @@ export function IntakeFeature() {
         </div>
         <div className="form-control mt-5">
           <p className="text-xl font-semibold">Base Calories Adjustment</p>
-          <label className="label cursor-pointer">
-            <span className="label-text text-lg">
-              +/- 250 kcal (Recommended)
-            </span>
-            <input
-              onChange={() => updateCaloriesAdjustment(250)}
-              checked={userInfo.caloriesAdjustment === 250}
-              className="radio checked:bg-green-500"
-              name="caloriesAdjustment"
-              type="radio"
-              value="250"
-            />
-          </label>
+          <RadioOption<string>
+            label="+/- 250 kcal (Recommended)"
+            value="250"
+            checked={userInfo.caloriesAdjustment === 250}
+            onChange={(value) => updateCaloriesAdjustment(Number(value))}
+            name="caloriesAdjustment"
+            className="radio checked:bg-green-500"
+          />
         </div>
         <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text text-lg">+/- 500 kcal</span>
-            <input
-              onChange={() => updateCaloriesAdjustment(500)}
-              checked={userInfo.caloriesAdjustment === 500}
-              className="radio checked:bg-orange-500"
-              name="caloriesAdjustment"
-              type="radio"
-              value="500"
-            />
-          </label>
+          <RadioOption<string>
+            label="+/- 500 kcal"
+            value="500"
+            checked={userInfo.caloriesAdjustment === 500}
+            onChange={(value) => updateCaloriesAdjustment(Number(value))}
+            name="caloriesAdjustment"
+            className="radio checked:bg-orange-500"
+          />
         </div>
         <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text text-lg">+/- 750 kcal</span>
-            <input
-              onChange={() => updateCaloriesAdjustment(750)}
-              checked={userInfo.caloriesAdjustment === 750}
-              className="radio checked:bg-red-500"
-              name="caloriesAdjustment"
-              type="radio"
-              value="750"
-            />
-          </label>
+          <RadioOption<string>
+            label="+/- 750 kcal"
+            value="750"
+            checked={userInfo.caloriesAdjustment === 750}
+            onChange={(value) => updateCaloriesAdjustment(Number(value))}
+            name="caloriesAdjustment"
+            className="radio checked:bg-red-500"
+          />
         </div>
 
         {bmr !== 0 ? (
