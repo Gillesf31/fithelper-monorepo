@@ -27,7 +27,11 @@ export default [
             },
             {
               sourceTag: 'type:feature',
-              onlyDependOnLibsWithTags: ['type:feature'],
+              onlyDependOnLibsWithTags: ['type:feature', 'type:data-access'],
+            },
+            {
+              sourceTag: 'type:data-access',
+              onlyDependOnLibsWithTags: ['type:data-access'],
             },
           ],
         },
