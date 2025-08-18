@@ -1,3 +1,4 @@
+import { Title } from '@fithelper-monorepo/shared-ui-components-title-ui';
 import { useNavigate } from 'react-router-dom';
 
 export function HomepageFeature() {
@@ -7,13 +8,16 @@ export function HomepageFeature() {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
         <div className="max-w-md">
-          <h1 className="text-5xl font-bold">Hello there</h1>
-          <p className="py-6">
+          <Title size="5xl">Hello there</Title>
+          <p className="pt-3 pb-6">
             Welcome to FitHelper, your personal fitness companion. Here you can
             track your workouts, monitor your progress, and achieve your fitness
             goals with ease.
           </p>
-          <button className="btn btn-primary" onClick={() => navigate('/intake')}>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate('/intake')}
+          >
             Get Started
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -3,6 +3,9 @@
   "include": [],
   "references": [
     {
+      "path": "../../../shared/ui-components/title/ui"
+    },
+    {
       "path": "../../../shared/ui-components/radio-option/ui"
     },
     {

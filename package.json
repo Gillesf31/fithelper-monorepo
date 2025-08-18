@@ -63,6 +63,7 @@
     "apps/*",
     "libs/fithelper-frontend/homepage/*",
     "libs/fithelper-frontend/intake/*",
-    "libs/shared/ui-components/radio-option/*"
+    "libs/shared/ui-components/radio-option/*",
+    "libs/shared/ui-components/title/*"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@fithelper-monorepo/shared-ui-components-radio-option-ui",
+  "name": "@fithelper-monorepo/shared-ui-components-title-ui",
   "version": "0.0.1",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

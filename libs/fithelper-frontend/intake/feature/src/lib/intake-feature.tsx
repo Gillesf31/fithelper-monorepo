@@ -3,6 +3,7 @@ import {
   UserInfo,
 } from '@fithelper-monorepo/intake-data-access';
 import { RadioOption } from '@fithelper-monorepo/shared-ui-components-radio-option-ui';
+import { Title } from '@fithelper-monorepo/shared-ui-components-title-ui';
 import { useState } from 'react';
 
 export function IntakeFeature() {
@@ -62,6 +63,7 @@ export function IntakeFeature() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <section className="w-full max-w-md flex flex-col p-4 card bg-base-300 shadow-xl">
+        <Title>Intake calculator</Title>
         <p className="text-xl font-semibold">Gender</p>
         <div className="form-control">
           <RadioOption<'male' | 'female'>

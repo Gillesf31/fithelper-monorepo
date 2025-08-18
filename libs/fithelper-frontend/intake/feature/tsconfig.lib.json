@@ -42,6 +42,9 @@
   "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
   "references": [
     {
+      "path": "../../../shared/ui-components/title/ui/tsconfig.lib.json"
+    },
+    {
       "path": "../../../shared/ui-components/radio-option/ui/tsconfig.lib.json"
     },
     {

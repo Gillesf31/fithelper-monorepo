@@ -22,6 +22,17 @@ export default [
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
           depConstraints: [
             {
+              sourceTag: 'scope:fithelper-frontend',
+              onlyDependOnLibsWithTags: [
+                'scope:fithelper-frontend',
+                'scope:shared',
+              ],
+            },
+            {
+              sourceTag: 'scope:shared',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+            {
               sourceTag: 'type:app',
               onlyDependOnLibsWithTags: ['type:feature'],
             },
