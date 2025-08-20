@@ -1,71 +1,50 @@
 export interface UserInfo {
   gender: 'male' | 'female';
   measurementSystem: 'metric' | 'imperial';
-  age: string;
-  weight: string;
-  height: string;
-  activityFactor: number;
+  age?: number;
+  weight?: number;
+  height?: number;
+  activityFactor: 1.0 | 1.1 | 1.2 | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | 1.9;
   caloriesAdjustment: number;
 }
 
-export interface CalorieResults {
-  bmr: number;
-  muscleGains: number;
-  loseFat: number;
-}
-
-const MIFFLIN_ST_JEOR_MALE = {
-  BASE: 88.362,
-  WEIGHT_COEFFICIENT: 13.397,
-  HEIGHT_COEFFICIENT: 4.799,
-  AGE_COEFFICIENT: 5.677,
-};
-
-const MIFFLIN_ST_JEOR_FEMALE = {
-  BASE: 447.593,
-  WEIGHT_COEFFICIENT: 9.247,
-  HEIGHT_COEFFICIENT: 3.098,
-  AGE_COEFFICIENT: 4.33,
+const BMR_CALCULATION_FORMULA: Record<
+  UserInfo['gender'],
+  (weight: number, height: number, age: number) => number
+> = {
+  male: (weight: number, height: number, age: number) =>
+    10 * weight + 6.25 * height - 5 * age + 5,
+  female: (weight: number, height: number, age: number) =>
+    10 * weight + 6.25 * height - 5 * age - 161,
 };
 
 export function calculateBMR(userInfo: UserInfo): number {
-  if (!userInfo.age || !userInfo.weight || !userInfo.height) return 0;
+  if (!userInfo.weight || !userInfo.height || !userInfo.age) return 0;
 
-  const age = parseInt(userInfo.age);
-  const weight = parseFloat(userInfo.weight);
-  const height = parseFloat(userInfo.height);
-
-  if (userInfo.gender === 'male') {
-    const { BASE, WEIGHT_COEFFICIENT, HEIGHT_COEFFICIENT, AGE_COEFFICIENT } =
-      MIFFLIN_ST_JEOR_MALE;
-    return Math.round(
-      (BASE +
-        WEIGHT_COEFFICIENT * weight +
-        HEIGHT_COEFFICIENT * height -
-        AGE_COEFFICIENT * age) *
-        userInfo.activityFactor
-    );
-  } else if (userInfo.gender === 'female') {
-    const { BASE, WEIGHT_COEFFICIENT, HEIGHT_COEFFICIENT, AGE_COEFFICIENT } =
-      MIFFLIN_ST_JEOR_FEMALE;
-    return Math.round(
-      (BASE +
-        WEIGHT_COEFFICIENT * weight +
-        HEIGHT_COEFFICIENT * height -
-        AGE_COEFFICIENT * age) *
-        userInfo.activityFactor
-    );
-  }
-  return 0;
+  const formula = BMR_CALCULATION_FORMULA[userInfo.gender];
+  return Math.round(formula(userInfo.weight, userInfo.height, userInfo.age));
 }
 
-export function calculateCalories(userInfo: UserInfo): CalorieResults {
-  const bmr = calculateBMR(userInfo);
-  const muscleGains = bmr + userInfo.caloriesAdjustment;
-  const loseFat = bmr - userInfo.caloriesAdjustment;
+export function calculateMaintenanceCalories(
+  bmr: number,
+  activityFactor: number
+): number {
+  if (bmr === 0) return 0;
+
+  return Math.round(bmr * activityFactor);
+}
+
+export function calculateCalories(
+  maintenanceCalories: number,
+  caloriesAdjustment: number
+): {
+  muscleGains: number;
+  loseFat: number;
+} {
+  const muscleGains = maintenanceCalories + caloriesAdjustment;
+  const loseFat = maintenanceCalories - caloriesAdjustment;
 
   return {
-    bmr,
     muscleGains,
     loseFat,
   };

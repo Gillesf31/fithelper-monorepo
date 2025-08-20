@@ -1,18 +1,20 @@
 import {
+  calculateBMR,
   calculateCalories,
+  calculateMaintenanceCalories,
   UserInfo,
 } from '@fithelper-monorepo/intake-data-access';
 import { RadioOption } from '@fithelper-monorepo/shared-ui-components-radio-option-ui';
 import { Title } from '@fithelper-monorepo/shared-ui-components-title-ui';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export function IntakeFeature() {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     gender: 'male',
     measurementSystem: 'metric',
-    age: '',
-    weight: '',
-    height: '',
+    age: undefined,
+    weight: undefined,
+    height: undefined,
     activityFactor: 1.2,
     caloriesAdjustment: 250,
   });
@@ -32,26 +34,36 @@ export function IntakeFeature() {
   //   }));
   // };
 
-  const updateAge = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const updateAge = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget?.value || '';
-    setUserInfo((prev: UserInfo) => ({ ...prev, age: value }));
+    setUserInfo((prev: UserInfo) => ({ ...prev, age: Number(value) }));
   };
 
-  const updateWeight = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const updateWeight = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget?.value || '';
-    setUserInfo((prev: UserInfo) => ({ ...prev, weight: value }));
+    setUserInfo((prev: UserInfo) => ({ ...prev, weight: Number(value) }));
   };
 
-  const updateHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const updateHeight = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget?.value || '';
-    setUserInfo((prev: UserInfo) => ({ ...prev, height: value }));
+    setUserInfo((prev: UserInfo) => ({ ...prev, height: Number(value) }));
   };
 
-  const updateActivityFactor = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const updateActivityFactor = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget?.value || '1.2';
     setUserInfo((prev: UserInfo) => ({
       ...prev,
-      activityFactor: parseFloat(value),
+      activityFactor: parseFloat(value) as
+        | 1.0
+        | 1.1
+        | 1.2
+        | 1.3
+        | 1.4
+        | 1.5
+        | 1.6
+        | 1.7
+        | 1.8
+        | 1.9,
     }));
   };
 
@@ -59,7 +71,15 @@ export function IntakeFeature() {
     setUserInfo((prev: UserInfo) => ({ ...prev, caloriesAdjustment: value }));
   };
 
-  const { bmr, muscleGains, loseFat } = calculateCalories(userInfo);
+  const maintenanceCalories = calculateMaintenanceCalories(
+    calculateBMR(userInfo),
+    userInfo.activityFactor
+  );
+
+  const { muscleGains, loseFat } = calculateCalories(
+    maintenanceCalories,
+    userInfo.caloriesAdjustment
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -231,10 +251,11 @@ export function IntakeFeature() {
           />
         </div>
 
-        {bmr !== 0 ? (
+        {maintenanceCalories !== 0 ? (
           <div className="my-3">
             <p className="text-lg">
-              Your maintenance calorie intake is {bmr} calories per day
+              Your maintenance calorie intake is {maintenanceCalories} calories
+              per day
             </p>
             <p className="text-lg">
               To gain muscle, consume {muscleGains} calories per day

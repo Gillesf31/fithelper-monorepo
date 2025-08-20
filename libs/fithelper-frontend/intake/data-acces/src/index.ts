@@ -1,6 +1,6 @@
 export {
   calculateBMR,
   calculateCalories,
-  type CalorieResults,
+  calculateMaintenanceCalories,
   type UserInfo,
 } from './intake-service';
