@@ -23,13 +23,14 @@ export function IntakeFeature() {
     setUserInfo((prev: UserInfo) => ({ ...prev, gender }));
   };
 
-  const updateSystem = () => {
-    setUserInfo((prev: UserInfo) => ({
-      ...prev,
-      measurementSystem:
-        prev.measurementSystem === 'metric' ? 'imperial' : 'metric',
-    }));
-  };
+  // NOTE: Will be implemented in the future
+  // const updateSystem = () => {
+  //   setUserInfo((prev: UserInfo) => ({
+  //     ...prev,
+  //     measurementSystem:
+  //       prev.measurementSystem === 'metric' ? 'imperial' : 'metric',
+  //   }));
+  // };
 
   const updateAge = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget?.value || '';
@@ -62,7 +63,8 @@ export function IntakeFeature() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <section className="w-full max-w-md flex flex-col p-4 card bg-base-300 shadow-xl">
+      <section className="indicator w-full max-w-md flex flex-col p-4 card bg-base-300 shadow-xl">
+        <span className="indicator-item badge badge-primary">new</span>
         <Title>Intake calculator</Title>
         <p className="text-xl font-semibold">Gender</p>
         <div className="form-control">
@@ -84,7 +86,8 @@ export function IntakeFeature() {
             className="radio checked:bg-pink-500"
           />
         </div>
-        <label className="swap place-content-start text-xl font-semibold my-3">
+        {/* NOTE: Will be implemented in the future */}
+        {/* <label className="swap place-content-start text-xl font-semibold my-3">
           <input onChange={updateSystem} type="checkbox" />
           {userInfo.measurementSystem === 'metric' ? (
             <>
@@ -97,7 +100,7 @@ export function IntakeFeature() {
               <div className="swap-on">Imperial</div>
             </>
           )}
-        </label>
+        </label> */}
         <label className="input input-bordered flex items-center mb-3 gap-2">
           Age
           <input
@@ -161,7 +164,12 @@ export function IntakeFeature() {
                   <div>Activity Factor Information</div>
                 </div>
                 <form className="modal-backdrop" method="dialog">
-                  <button onClick={() => setShowModal(false)}>close</button>
+                  <button
+                    className="btn btn-ghost"
+                    onClick={() => setShowModal(false)}
+                  >
+                    close
+                  </button>
                 </form>
               </dialog>
             )}
@@ -236,7 +244,7 @@ export function IntakeFeature() {
             </p>
           </div>
         ) : (
-          <p className="my-3 text-md">
+          <p className="my-3 text-lg">
             <span role="img" aria-label="Warning">
               ⚠️
             </span>{' '}

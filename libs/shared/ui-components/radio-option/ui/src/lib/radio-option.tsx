@@ -17,7 +17,7 @@ export function RadioOption<T extends string>({
 }: RadioOptionProps<T>) {
   return (
     <label className="label cursor-pointer">
-      <span className="label-text text-lg">{label}</span>
+      <span className="label-text text-base">{label}</span>
       <input
         onChange={() => onChange(value)}
         checked={checked}
